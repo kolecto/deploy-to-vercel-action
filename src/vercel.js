@@ -14,9 +14,12 @@ const {
 	REF,
 	TRIM_COMMIT_MESSAGE,
 	BUILD_ENV,
+	ENV,
 	PREBUILT,
+	TARGET,
 	WORKING_DIRECTORY,
-	FORCE
+	FORCE,
+	ARCHIVE
 } = require('./config')
 
 const init = () => {
@@ -41,8 +44,16 @@ const init = () => {
 			commandArguments.push('--prebuilt')
 		}
 
+		if (TARGET) {
+			commandArguments.push(`--target=${ TARGET }`)
+		}
+
 		if (FORCE) {
 			commandArguments.push('--force')
+		}
+
+		if (ARCHIVE) {
+			commandArguments.push(`--archive=${ ARCHIVE }`)
 		}
 
 		if (commit) {
@@ -67,6 +78,12 @@ const init = () => {
 		if (BUILD_ENV) {
 			BUILD_ENV.forEach((item) => {
 				commandArguments = commandArguments.concat([ '--build-env', item ])
+			})
+		}
+
+		if (ENV) {
+			ENV.forEach((item) => {
+				commandArguments = commandArguments.concat([ '--env', item ])
 			})
 		}
 

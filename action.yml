@@ -27,6 +27,10 @@ inputs:
     description: |
       Deploy a prebuilt Vercel Project (default: false).
     required: false
+  TARGET:
+    description: |
+      Environment you want to deploy to on Vercel.
+    required: false
   GITHUB_DEPLOYMENT:
     description: |
       Create a deployment on GitHub (default: true).
@@ -75,6 +79,10 @@ inputs:
     description: |
       Provide environment variables to the build step.
     required: false
+  ENV:
+    description: |
+      Provide environment variables that will be available at runtime.
+    required: false
   WORKING_DIRECTORY:
     description: |
       Working directory for the Vercel CLI.
@@ -82,6 +90,10 @@ inputs:
   FORCE:
     description: |
       Used to skip the build cache.
+    required: false
+  ARCHIVE:
+    description: |
+      Compress deployment code (e.g. "tgz").
     required: false
 
 outputs:
