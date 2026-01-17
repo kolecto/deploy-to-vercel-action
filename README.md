@@ -93,9 +93,12 @@ Here are all the inputs [deploy-to-vercel-action](https://github.com/BetaHuhn/de
 | `PR_PREVIEW_DOMAIN` | Custom preview domain for PRs (more info [below](#custom-domains)) | **No** | N/A |
 | `VERCEL_SCOPE` | Execute commands from a different Vercel team or user | **No** | N/A |
 | `BUILD_ENV` | Provide environment variables to the build step | **No** | N/A |
+| `ENV` | Provide environment variables that will be available at runtime | **No** | N/A |
 | `WORKING_DIRECTORY` | Working directory for the Vercel CLI | **No** | N/A |
 | `FORCE` | Used to skip the build cache. | **No** | false
 | `PREBUILT` | Deploy a prebuilt Vercel Project. | **No** | false
+| `TARGET` | Environment you want to deploy to on Vercel | **No** | N/A |
+| `ARCHIVE` | Compress deployment code (e.g. "tgz") | **No** | N/A |
 
 ## 🛠️ Configuration
 

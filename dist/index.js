@@ -15974,16 +15974,27 @@ const context = {
 		key: 'BUILD_ENV',
 		type: 'array'
 	}),
+	ENV: parser.getInput({
+		key: 'ENV',
+		type: 'array'
+	}),
 	PREBUILT: parser.getInput({
 		key: 'PREBUILT',
 		type: 'boolean',
 		default: false
+	}),
+	TARGET: parser.getInput({
+		key: 'TARGET'
 	}),
 	RUNNING_LOCAL: process.env.RUNNING_LOCAL === 'true',
 	FORCE: parser.getInput({
 		key: 'FORCE',
 		type: 'boolean',
 		default: false
+	}),
+	ARCHIVE: parser.getInput({
+		key: 'ARCHIVE',
+		type: 'string'
 	})
 }
 
@@ -16003,6 +16014,7 @@ const setDynamicVars = () => {
 		context.ACTOR = process.env.ACTOR || context.USER
 		context.IS_FORK = process.env.IS_FORK === 'true' || false
 		context.TRIM_COMMIT_MESSAGE = process.env.TRIM_COMMIT_MESSAGE === 'true' || false
+		context.ARCHIVE = process.env.ARCHIVE || undefined
 
 		return
 	}
@@ -16248,9 +16260,12 @@ const {
 	REF,
 	TRIM_COMMIT_MESSAGE,
 	BUILD_ENV,
+	ENV,
 	PREBUILT,
+	TARGET,
 	WORKING_DIRECTORY,
-	FORCE
+	FORCE,
+	ARCHIVE
 } = __nccwpck_require__(4570)
 
 const init = () => {
@@ -16275,8 +16290,16 @@ const init = () => {
 			commandArguments.push('--prebuilt')
 		}
 
+		if (TARGET) {
+			commandArguments.push(`--target=${ TARGET }`)
+		}
+
 		if (FORCE) {
 			commandArguments.push('--force')
+		}
+
+		if (ARCHIVE) {
+			commandArguments.push(`--archive=${ ARCHIVE }`)
 		}
 
 		if (commit) {
@@ -16301,6 +16324,12 @@ const init = () => {
 		if (BUILD_ENV) {
 			BUILD_ENV.forEach((item) => {
 				commandArguments = commandArguments.concat([ '--build-env', item ])
+			})
+		}
+
+		if (ENV) {
+			ENV.forEach((item) => {
+				commandArguments = commandArguments.concat([ '--env', item ])
 			})
 		}
 
