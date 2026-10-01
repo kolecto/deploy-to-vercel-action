@@ -9,7 +9,8 @@ const {
 	REF,
 	LOG_URL,
 	PR_LABELS,
-	GITHUB_DEPLOYMENT_ENV
+	GITHUB_DEPLOYMENT_ENV,
+	ACTOR
 } = require('./config')
 
 const init = () => {
@@ -103,8 +104,8 @@ const init = () => {
 		})
 
 		return {
-			authorName: data.commit.author.name,
-			authorLogin: data.author.login,
+			authorName: data.commit.author?.name ?? ACTOR,
+			authorLogin: data.author?.login ?? ACTOR,
 			commitMessage: data.commit.message
 		}
 	}
